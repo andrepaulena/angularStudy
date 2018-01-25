@@ -15,6 +15,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { ReactiveFormsModule, FormsModule, FormBuilder  } from '@angular/forms'
 
 @NgModule({
   imports: [
@@ -34,8 +35,10 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatSelectModule,
     MatInputModule,
     MatGridListModule,
-    MatGridListModule
+    ReactiveFormsModule,
+    FormsModule
   ],
-  declarations: [MainComponent, ConsultaComponent, FormularioComponent]
+  declarations: [MainComponent, ConsultaComponent, FormularioComponent],
+  providers: [FormBuilder]
 })
 export class MainModule { }

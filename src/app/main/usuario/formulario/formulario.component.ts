@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-formulario',
@@ -7,11 +8,35 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class FormularioComponent implements OnInit {
+  public perfis = [
+    { id: "PROFESSOR", descricao: 'Professor' },
+    { id: "ADMINISTRADOR", descricao: 'Administrador' },
+    { id: "ALUNO", descricao: 'Aluno' },
+  ];
 
-  constructor() { }
+  form:FormGroup;
 
-  ngOnInit() {
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      nome: ['', Validators.required ],
+      login: ['', Validators.required ],
+      perfil : ['', Validators.required ],
+      email: ['', [Validators.email] ],
+      senha: ['', [Validators.required, Validators.minLength(6)]],
+      confirmacao: ['', [Validators.required, Validators.minLength(6)]]
+    });
   }
 
+  ngOnInit() {
+    
+  }
+
+  sendForm() {
+    if(this.form.invalid){
+      return;
+    }
+    
+    console.log(this.form);
+  }
 }
 
