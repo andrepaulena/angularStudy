@@ -22,21 +22,21 @@ export class UsuarioService {
     return this.mock;
   }
 
-  save(user = null){
-    if(user){
-      let index = this.mock.find(item => item.id == user.id);
+  save(user){
+    if(user.id){
+      let index = this.mock.findIndex(item => item.id == user.id);
 
       if(index > -1){
         this.mock[index] = user;
       }
     }else{
+      user.id = this.mock.length + 1;
       this.mock.push(user);
     }
   }
 
-  delete(id)
-  {
-    let index = this.mock.find(item => item.id == id);
+  delete(id){
+    let index = this.mock.findIndex(item => item.id == id);
 
     if(index > -1){
       this.mock.splice(index,1);

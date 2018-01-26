@@ -6,7 +6,7 @@ import { MainRouting } from './main.routing';
 import { RouterModule } from "@angular/router";
 
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { MatInputModule, MatIconModule, MatSidenavModule, MatCardModule, MatListModule, MatToolbarModule, MatButtonModule } from '@angular/material';
+import { MatInputModule, MatIconModule, MatSidenavModule, MatCardModule, MatListModule, MatToolbarModule, MatButtonModule, MatSnackBar } from '@angular/material';
 
 import { ConsultaComponent } from './usuario/consulta/consulta.component';
 import { FormularioComponent } from './usuario/formulario/formulario.component';
@@ -17,6 +17,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ReactiveFormsModule, FormsModule, FormBuilder  } from '@angular/forms'
 import { UsuarioService } from './usuario/usuario.service';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   imports: [
@@ -37,9 +38,10 @@ import { UsuarioService } from './usuario/usuario.service';
     MatInputModule,
     MatGridListModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatSnackBarModule
   ],
   declarations: [MainComponent, ConsultaComponent, FormularioComponent],
-  providers: [FormBuilder,UsuarioService]
+  providers: [FormBuilder,UsuarioService, MatSnackBar]
 })
 export class MainModule { }
