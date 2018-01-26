@@ -4,9 +4,10 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatInputModule} from '@angular/material/input';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from "./app.routing";
 
+import { MainModule } from "./main/main.module";
 
 @NgModule({
   declarations: [
@@ -15,8 +16,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatInputModule,
-    MatSlideToggleModule
+    AppRoutingModule,
+    RouterModule,
+    MainModule
   ],
   providers: [],
   bootstrap: [AppComponent]
