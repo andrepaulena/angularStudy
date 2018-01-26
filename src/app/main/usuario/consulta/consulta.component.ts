@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { UsuarioService } from '../usuario.service';
 
 @Component({
   selector: 'app-consulta',
@@ -8,21 +9,11 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class ConsultaComponent {
   displayedColumns = ['id', 'nome', 'login', 'email', 'perfil', 'actions'];
-  dataSource = new MatTableDataSource<Element>(ELEMENT_DATA);
+  users:Array<Element>;
+  dataSource = null;
 
-  constructor() {
-    for(var i = 0; i < 5; i ++){
-      var element = new User();
-      var userId = i + 1; 
-
-      element.id = userId;
-      element.email = "teste" + userId + "@teste.com";
-      element.login = "teste" + userId;
-      element.nome = "Teste " + userId;
-      element.perfil = i%2==0?"Admin":"Padrão";
-  
-      ELEMENT_DATA.push(element);
-    }
+  constructor(private userService:UsuarioService) {
+    this.dataSource = new MatTableDataSource<Element>(this.userService.getAll());
   }
 
   ngOnInit() {
@@ -30,14 +21,6 @@ export class ConsultaComponent {
 }
 
 export interface Element {
-  id: number;
-  nome: string;
-  login: string;
-  email: string;
-  perfil: string;
-}
-
-export class User implements Element {
   id: number;
   nome: string;
   login: string;

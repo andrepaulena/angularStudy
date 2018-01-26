@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EqualsFieldValidator } from '../../../validators/equals-field-validator.validator';
 
 @Component({
   selector: 'app-formulario',
@@ -24,7 +25,7 @@ export class FormularioComponent implements OnInit {
       email: ['', [Validators.email] ],
       senha: ['', [Validators.required, Validators.minLength(6)]],
       confirmacao: ['', [Validators.required, Validators.minLength(6)]]
-    });
+    }, {validator: EqualsFieldValidator.validate("senha", "confirmacao")});
   }
 
   ngOnInit() {
