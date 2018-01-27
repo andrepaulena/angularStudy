@@ -1,3 +1,37 @@
-<p>
-  formulario works!
-</p>
+<form fxLayout="column">
+    <mat-form-field fxFlex="100">
+      <input matInput placeholder="Nome">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="E-mail" type="email">
+    </mat-form-field>
+
+    <div fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="47">
+            <input matInput placeholder="Login">
+          </mat-form-field>
+      
+          <mat-form-field fxFlex="47">
+            <mat-select placeholder="Perfil">
+              <mat-option value="option">Option</mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>
+
+    <div fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="47">
+            <input matInput placeholder="Senha" type="password">
+          </mat-form-field>
+      
+          <mat-form-field fxFlex="47">
+            <input matInput placeholder="Confirmação" type="password">
+          </mat-form-field>
+    </div>
+   
+    <div fxLayoutAlign="space-between">
+        <button mat-raised-button color="warn">Cancelar</button>
+        <button mat-raised-button color="primary">Cadastrar</button>
+    </div>
+   
+  </form>
