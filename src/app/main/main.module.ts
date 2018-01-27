@@ -10,6 +10,8 @@ import { MatIconModule, MatSidenavModule, MatCardModule, MatListModule, MatToolb
 
 import { ConsultaComponent } from './usuario/consulta/consulta.component';
 import { FormularioComponent } from './usuario/formulario/formulario.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   imports: [
@@ -22,7 +24,9 @@ import { FormularioComponent } from './usuario/formulario/formulario.component';
     MatCardModule,
     MatListModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule,
+    MatTooltipModule
   ],
   declarations: [MainComponent, ConsultaComponent, FormularioComponent]
 })
