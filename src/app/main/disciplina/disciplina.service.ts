@@ -3,8 +3,8 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
-export class UsuarioService {
-  private url = environment.url+'/api/v1/usuarios';
+export class DisciplinaService {
+  private url = environment.url+'/api/v1/disciplinas';
   
   mock:Array<any>;
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EqualsFieldValidator } from '../../../validators/equals-field-validator.validator';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UsuarioService } from '../usuario.service';
+import { DisciplinaService } from '../disciplina.service';
 import { MatSnackBar } from '@angular/material';
 
 @Component({
@@ -12,10 +12,16 @@ import { MatSnackBar } from '@angular/material';
 })
 
 export class FormularioComponent implements OnInit {
-  public perfis = [
-    { id: "PROFESSOR", descricao: 'Professor' },
-    { id: "ADMINISTRADOR", descricao: 'Administrador' },
-    { id: "ALUNO", descricao: 'Aluno' },
+  public instrutores = [
+    { id: 1, nome: 'Bátima' },
+    { id: 2, nome: 'Irineu' },
+    { id: 3, nome: 'Bill' }
+  ];
+
+  public segmentos = [
+    { id: "FRONTEND", nome: 'Frontend' },
+    { id: "BACKEND", nome: 'Backend' },
+    { id: "MOBILE", nome: 'Mobile' },
   ];
 
   id:number;
@@ -24,19 +30,19 @@ export class FormularioComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private _routerActive:ActivatedRoute,
-    private userService:UsuarioService,
+    private userService:DisciplinaService,
     public snackBar: MatSnackBar,
     private _router:Router
   ) {
     this.form = this.fb.group({
       id: '',
-      nome: ['', Validators.required ],
-      login: ['', Validators.required ],
-      perfil : ['', Validators.required ],
-      email: ['', [Validators.email] ],
-      senha: ['', [Validators.required, Validators.minLength(6)]],
-      confirmacao: ['', [Validators.required, Validators.minLength(6)]]
-    }, {validator: EqualsFieldValidator.validate("senha", "confirmacao")});
+      descricao: ['', Validators.required ],
+      instrutores: ['',this.fb.array([]) ],
+      dataInicio : ['', Validators.required ],
+      dataTermino: ['', Validators.required ],
+      segmento: ['', Validators.required ],
+      urlLogo: [''],
+    });
   }
 
   ngOnInit() {
@@ -74,9 +80,9 @@ export class FormularioComponent implements OnInit {
         });
 
         this.form.reset();
-        this._router.navigate(['/main/usuario/consulta']);
+        this._router.navigate(['/main/Disciplina/consulta']);
 
-        this._router.navigate(['/main/usuario/consulta']);
+        this._router.navigate(['/main/Disciplina/consulta']);
       });
   }
 }

@@ -1,0 +1,72 @@
+<form [formGroup]="form" fxLayout="column" (submit)="sendForm()">
+   <div fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="47"> 
+            <mat-select formControlName="segmento" placeholder="Segmento">
+                <mat-option *ngFor="let seg of segmentos" [value]="seg.id">
+                    {{ seg.nome }}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.controls['segmento'].hasError('required')">
+                Campo obrigatório
+            </mat-error>
+        </mat-form-field>    
+
+        <mat-form-field fxFlex="47">
+            <input matInput placeholder="Descrição" formControlName="descricao">
+            <mat-error *ngIf="form.controls['descricao'].hasError('required')">
+                Campo obrigatório
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="47"> 
+            <input matInput [matDatepicker]="dataInicio" placeholder="Data de início">
+            <mat-datepicker-toggle matSuffix [for]="dataInicio"></mat-datepicker-toggle>
+            <mat-datepicker #dataInicio></mat-datepicker>
+            <mat-error *ngIf="form.controls['dataInicio'].hasError('required')">
+                Campo obrigatório
+            </mat-error>
+        </mat-form-field>    
+
+        <mat-form-field fxFlex="47"> 
+            <input matInput [matDatepicker]="dataTermino" placeholder="Data de término">
+            <mat-datepicker-toggle matSuffix [for]="dataTermino"></mat-datepicker-toggle>
+            <mat-datepicker #dataTermino></mat-datepicker>
+            <mat-error *ngIf="form.controls['dataTermino'].hasError('required')">
+                Campo obrigatório
+            </mat-error>
+        </mat-form-field>  
+    </div>
+
+    <div>
+        <mat-form-field fxFlex="47"> 
+            <input matInput placeholder="Logo url" formControlName="urlLogo">
+        </mat-form-field>    
+        <div fxFlexOffset="40px">
+            <img src="" [src]="form.value.urlLogo" alt="">
+        </div>
+    </div>
+
+    <div>
+        <mat-form-field fxFlex="47"> 
+            <mat-select formControlName="instrutores" placeholder="Instrutores">
+                <mat-option *ngFor="let ins of instrutores" [value]="ins.id">
+                    {{ ins.nome }}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.controls['instrutores'].hasError('required')">
+                Campo obrigatório
+            </mat-error>
+        </mat-form-field>
+        <button mat-mini-fab color="primary" matTooltip="Adicionar" fxFlexOffset="40px">
+            <mat-icon>add</mat-icon>
+        </button>      
+    </div>
+    
+    <div fxLayoutAlign="space-between">
+        <button mat-raised-button color="warn" routerLink="/main/usuario/consulta">Cancelar</button>
+        <button mat-raised-button color="primary">Cadastrar</button>
+    </div>
+   
+  </form>

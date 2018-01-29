@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { UsuarioService } from '../usuario.service';
+import { DisciplinaService } from '../disciplina.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router'
 
@@ -10,12 +10,12 @@ import { Router } from '@angular/router'
   styleUrls: ['./consulta.component.scss']
 })
 export class ConsultaComponent {
-  displayedColumns = ['id', 'nome', 'login', 'email', 'perfil', 'actions'];
+  displayedColumns = ['id','instrutores','descricao', 'segmento', 'dataInicio', 'dataTermino', 'actions'];
   users:Array<Element>;
   dataSource = null;
 
   constructor(
-    private userService:UsuarioService,
+    private service:DisciplinaService,
     private _router:Router, 
     public snackBar: MatSnackBar
   ) {
@@ -27,7 +27,7 @@ export class ConsultaComponent {
   }
 
   deleteUser(id:number){
-    return this.userService.delete(id).subscribe(suc=> {
+    return this.service.delete(id).subscribe(suc=> {
       this.populateDataSource();
 
       this.snackBar.open('Usuário removido', 'Ok', {
@@ -37,11 +37,13 @@ export class ConsultaComponent {
   }
 
   editUser(id){
-    this._router.navigate(['/main/usuario/editar', id]);
+    this._router.navigate(['/main/disciplina/editar', id]);
   }
 
   private populateDataSource(){
-    let list = this.userService.getAll().subscribe(suc=>{
+    let list = this.service.getAll().subscribe(suc=>{
+      console.log(suc);
+
       this.dataSource = new MatTableDataSource<any>(suc);
     });
   }
