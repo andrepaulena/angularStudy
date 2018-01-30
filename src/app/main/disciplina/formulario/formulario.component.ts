@@ -4,6 +4,7 @@ import { EqualsFieldValidator } from '../../../validators/equals-field-validator
 import { ActivatedRoute, Router } from '@angular/router';
 import { DisciplinaService } from '../disciplina.service';
 import { MatSnackBar } from '@angular/material';
+import { InstrutorService } from '../instrutor.service';
 
 @Component({
   selector: 'app-formulario',
@@ -12,11 +13,7 @@ import { MatSnackBar } from '@angular/material';
 })
 
 export class FormularioComponent implements OnInit {
-  public instrutores = [
-    { id: 1, nome: 'Bátima' },
-    { id: 2, nome: 'Irineu' },
-    { id: 3, nome: 'Bill' }
-  ];
+  public instrutores = [];
 
   public segmentos = [
     { id: "FRONTEND", nome: 'Frontend' },
@@ -32,7 +29,8 @@ export class FormularioComponent implements OnInit {
     private _routerActive:ActivatedRoute,
     private userService:DisciplinaService,
     public snackBar: MatSnackBar,
-    private _router:Router
+    private _router:Router,
+    private instrutorService:InstrutorService
   ) {
     this.form = this.fb.group({
       id: '',
@@ -48,6 +46,10 @@ export class FormularioComponent implements OnInit {
   ngOnInit() {
     this._routerActive.params.subscribe(params=>{
       this.id = params['id'];
+    });
+
+    this.instrutorService.getAll().subscribe(response=>{
+     this.instrutores = response;
     });
 
     if(this.id){
