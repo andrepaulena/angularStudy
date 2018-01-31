@@ -16,8 +16,13 @@
 
     <!-- Name Column -->
     <ng-container matColumnDef="professores">
-      <mat-header-cell *matHeaderCellDef> Instrutores </mat-header-cell>
-      <mat-cell *matCellDef="let disciplina" class="text-center"> {{disciplina.professores.length}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef> Professores </mat-header-cell>
+      <mat-cell *matCellDef="let disciplina" class="text-center">
+          <button mat-icon-button color="primary" matTooltip="Exibir professores" (click)="showProfessors(disciplina.professores)">
+              <mat-icon>group</mat-icon>
+          </button>
+          {{disciplina.professores.length}}
+      </mat-cell>
     </ng-container>
 
     <!-- Name Column -->
@@ -47,6 +52,9 @@
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
       <mat-cell *matCellDef="let disciplina">
+          <button mat-icon-button color="primary" matTooltip="Exibir QrCode" (click)="showQrCode(disciplina)">
+              <mat-icon>phone_android</mat-icon>
+          </button>
           <button mat-icon-button color="primary" matTooltip="Editar" (click)="editDisciplina(disciplina.id)">
               <mat-icon>edit</mat-icon>
           </button>

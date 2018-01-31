@@ -13,6 +13,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { professorService } from './professor.service';
 import { MatChipsModule } from '@angular/material/chips';
+import { ProfessorComponent } from './professor/professor.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
+import { QrcodeComponent } from './qrcode/qrcode.component';
+import { QrCodeService } from './qrCode.service';
 
 @NgModule({
   imports: [
@@ -34,13 +39,17 @@ import { MatChipsModule } from '@angular/material/chips';
     MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatChipsModule
+    MatChipsModule,
+    MatDialogModule,
+    MatListModule
   ],
-  declarations: [ConsultaComponent, FormularioComponent],
+  entryComponents: [ProfessorComponent, QrcodeComponent],
+  declarations: [ConsultaComponent, FormularioComponent, ProfessorComponent, QrcodeComponent],
   providers: [
     FormBuilder, 
     DisciplinaService,
     professorService,
+    QrCodeService,
     HttpClient,
     {provide:MAT_DATE_LOCALE, useValue: 'pt-br'}
   ]

@@ -57,10 +57,10 @@ export class FormularioComponent implements OnInit {
             let professores = [];
 
             for(let id in response.professores){
-              let finded = this.professores.findIndex(item => item.id == response.professores[id]);
+              let found = this.professores.findIndex(item => item.id == response.professores[id]);
 
-              if(finded != -1){
-                professores.push(this.professores[finded]);
+              if(found != -1){
+                professores.push(this.professores[found]);
               }
             }
 

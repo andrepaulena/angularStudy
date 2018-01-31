@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { DisciplinaService } from '../disciplina.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import { Router } from '@angular/router'
+import { ProfessorComponent } from '../professor/professor.component';
+import { professorService } from '../professor.service';
+import { QrcodeComponent } from '../qrcode/qrcode.component';
 
 @Component({
   selector: 'app-consulta',
@@ -17,13 +20,41 @@ export class ConsultaComponent {
   constructor(
     private service:DisciplinaService,
     private _router:Router, 
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private dialog: MatDialog,
+    private professorService:professorService
   ) {
     
   }
 
   ngOnInit() {
     this.populateDataSource();
+  }
+
+  showQrCode(disciplina)
+  {
+   let dialogRef = this.dialog.open(QrcodeComponent, {
+    data : {disciplina : disciplina}
+   });
+  }
+
+  showProfessors(professors)
+  {
+    this.professorService.getAll().subscribe(response=>{
+      let professorsFound = [];
+
+      for(let id in professors){
+        let found = response.findIndex(item => item.id == professors[id]);
+
+        if(found != -1){
+          professorsFound.push(response[found]);
+        }
+      }
+
+      let dialogRef = this.dialog.open(ProfessorComponent, {
+        data: {professores: professorsFound}
+      });
+    });
   }
 
   deleteDisciplina(id:number){

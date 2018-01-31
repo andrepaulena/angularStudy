@@ -1,0 +1,7 @@
+<h3>Listagem de professores</h3>
+
+<mat-list role="list">
+    <mat-list-item role="listitem" *ngFor="let pro of data.professores">
+      {{pro.nome}} - {{pro.email}}
+    </mat-list-item>
+</mat-list>

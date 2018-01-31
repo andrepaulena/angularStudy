@@ -1,0 +1,12 @@
+<div class="center">
+    <h5 mat-dialog-title>
+        {{disciplina.segmento}} - {{disciplina.descricao}}
+    </h5>
+    
+    <h6 mat-dialog-title>
+        Presença confirmada <br> 
+        {{disciplina.data | date:'dd/MM/yyyy' }}
+    </h6>
+    
+    <img src="" [src]="qrCode" alt="">
+</div>
