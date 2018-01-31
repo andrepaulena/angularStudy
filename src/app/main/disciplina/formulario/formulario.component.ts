@@ -4,7 +4,8 @@ import { EqualsFieldValidator } from '../../../validators/equals-field-validator
 import { ActivatedRoute, Router } from '@angular/router';
 import { DisciplinaService } from '../disciplina.service';
 import { MatSnackBar } from '@angular/material';
-import { InstrutorService } from '../instrutor.service';
+import { professorService } from '../professor.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-formulario',
@@ -13,8 +14,8 @@ import { InstrutorService } from '../instrutor.service';
 })
 
 export class FormularioComponent implements OnInit {
-  public instrutores = [];
-
+  public professores = [];
+ 
   public segmentos = [
     { id: "FRONTEND", nome: 'Frontend' },
     { id: "BACKEND", nome: 'Backend' },
@@ -27,15 +28,15 @@ export class FormularioComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private _routerActive:ActivatedRoute,
-    private userService:DisciplinaService,
     public snackBar: MatSnackBar,
     private _router:Router,
-    private instrutorService:InstrutorService
+    private professorService:professorService,
+    private service:DisciplinaService
   ) {
     this.form = this.fb.group({
       id: '',
       descricao: ['', Validators.required ],
-      instrutores: ['',this.fb.array([]) ],
+      professores: ['',this.fb.array([]) ],
       dataInicio : ['', Validators.required ],
       dataTermino: ['', Validators.required ],
       segmento: ['', Validators.required ],
@@ -48,33 +49,67 @@ export class FormularioComponent implements OnInit {
       this.id = params['id'];
     });
 
-    this.instrutorService.getAll().subscribe(response=>{
-     this.instrutores = response;
-    });
+    this.professorService.getAll().subscribe(response=>{
+     this.professores = response;
 
-    if(this.id){
-      this.userService.getById(this.id).subscribe(response=>{
-        response.senha = null;
-        response.confirmacao = null;
-        delete response.urlFoto;
-        this.form.controls.senha.setValidators(null);
-        this.form.controls.confirmacao.setValidators(null);
-        this.form.setValue(response);
-      });
-    }
+      if(this.id) {
+          this.service.getById(this.id).subscribe(response=>{
+            let professores = [];
+
+            for(let id in response.professores){
+              let finded = this.professores.findIndex(item => item.id == response.professores[id]);
+
+              if(finded != -1){
+                professores.push(this.professores[finded]);
+              }
+            }
+
+            response.professores = professores;
+            this.form.setValue(response);
+          });
+      }
+    });
+  }
+
+  removeProfessor(id){
+    let value = this.form.get('professores').value;
+    let index = value.findIndex(item => item.id == id);
+
+    value.splice(index,1);
+
+    this.form.controls.professores.setValue(value);
+  }
+
+  notFound(event){
+    event.target.src = 'https://img.meutimao.com.br/_upload/forumtopico/2015/12/06/faustao-erroujpg.jpg'
   }
 
   sendForm() {
+    if(this.form.controls.professores.value.length < 2){
+      this.snackBar.open('A disciplina deve ter pelo menos 2 professores', 'Ok', {
+        duration: 3000,
+      });
+      
+      return;
+    }
+
     if(this.form.invalid){
       return;
     }
 
-    this.userService.save(this.form.value).subscribe(
+    let value = this.form.value;
+    value.dataInicio = moment(value.dataInicio).format('YYYY-MM-DD');
+    value.dataTermino = moment(value.dataTermino).format('YYYY-MM-DD');
+    value.professores = value.professores.map(professor=>{
+      return professor.id;
+    });
+
+    this.service.save(value).subscribe(
       response => {
-        let message = 'Usuário criado com sucesso';
+        let message = 'Disciplina criada com sucesso';
 
         if(this.form.value.id){
-          message = 'Usuário editado com sucesso';
+          message = 'Disciplina editada com sucesso';
         }
 
         this.snackBar.open(message, 'Ok', {
@@ -82,10 +117,9 @@ export class FormularioComponent implements OnInit {
         });
 
         this.form.reset();
-        this._router.navigate(['/main/Disciplina/consulta']);
-
-        this._router.navigate(['/main/Disciplina/consulta']);
-      });
+        this._router.navigate(['/main/disciplina/consulta']);
+      }
+    );
   }
 }
 

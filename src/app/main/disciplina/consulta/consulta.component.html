@@ -7,10 +7,17 @@
       <mat-cell *matCellDef="let disciplina"> {{disciplina.id}} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="logoUrl">
+        <mat-header-cell *matHeaderCellDef> Logo </mat-header-cell>
+        <mat-cell *matCellDef="let disciplina" class="text-center">
+            <img src="" *ngIf="disciplina.urlLogo" [src]="disciplina.urlLogo" class="logoImg" alt="">
+        </mat-cell>
+      </ng-container>
+
     <!-- Name Column -->
-    <ng-container matColumnDef="instrutores">
-      <mat-header-cell *matHeaderCellDef> Istrutores </mat-header-cell>
-      <mat-cell *matCellDef="let disciplina"> {{disciplina.instrutores.length}} </mat-cell>
+    <ng-container matColumnDef="professores">
+      <mat-header-cell *matHeaderCellDef> Instrutores </mat-header-cell>
+      <mat-cell *matCellDef="let disciplina" class="text-center"> {{disciplina.professores.length}} </mat-cell>
     </ng-container>
 
     <!-- Name Column -->
@@ -40,10 +47,10 @@
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
       <mat-cell *matCellDef="let disciplina">
-          <button mat-icon-button color="primary" matTooltip="Editar" (click)="editdisciplina(disciplina.id)">
+          <button mat-icon-button color="primary" matTooltip="Editar" (click)="editDisciplina(disciplina.id)">
               <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button color="warn" matTooltip="Excluir" (click)="deletedisciplina(disciplina.id)">
+          <button mat-icon-button color="warn" matTooltip="Excluir" (click)="deleteDisciplina(disciplina.id)">
               <mat-icon>delete</mat-icon>
           </button>
       </mat-cell>

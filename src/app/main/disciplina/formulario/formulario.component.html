@@ -21,7 +21,7 @@
 
     <div fxLayoutAlign="space-between">
         <mat-form-field fxFlex="47"> 
-            <input matInput [matDatepicker]="dataInicio" placeholder="Data de início">
+            <input matInput [matDatepicker]="dataInicio" formControlName="dataInicio" placeholder="Data de início">
             <mat-datepicker-toggle matSuffix [for]="dataInicio"></mat-datepicker-toggle>
             <mat-datepicker #dataInicio></mat-datepicker>
             <mat-error *ngIf="form.controls['dataInicio'].hasError('required')">
@@ -30,7 +30,7 @@
         </mat-form-field>    
 
         <mat-form-field fxFlex="47"> 
-            <input matInput [matDatepicker]="dataTermino" placeholder="Data de término">
+            <input matInput [matDatepicker]="dataTermino" formControlName="dataTermino" placeholder="Data de término">
             <mat-datepicker-toggle matSuffix [for]="dataTermino"></mat-datepicker-toggle>
             <mat-datepicker #dataTermino></mat-datepicker>
             <mat-error *ngIf="form.controls['dataTermino'].hasError('required')">
@@ -44,28 +44,38 @@
             <input matInput placeholder="Logo url" formControlName="urlLogo">
         </mat-form-field>    
         <div fxFlexOffset="40px">
-            <img src="" [src]="form.value.urlLogo" alt="">
+            <img src="" (error)="notFound($event)" [src]="form.value.urlLogo" class="logoImg" alt="">
         </div>
     </div>
 
     <div>
         <mat-form-field fxFlex="47"> 
-            <mat-select formControlName="instrutores" placeholder="Instrutores">
-                <mat-option *ngFor="let ins of instrutores" [value]="ins.id">
+            <mat-select
+            require
+            multiple 
+            formControlName="professores" 
+            placeholder="Professores">
+                <mat-option *ngFor="let ins of professores" [value]="ins">
                     {{ ins.nome }}
                 </mat-option>
             </mat-select>
-            <mat-error *ngIf="form.controls['instrutores'].hasError('required')">
+            <mat-error *ngIf="form.controls['professores'].hasError('required')">
                 Campo obrigatório
             </mat-error>
         </mat-form-field>
-        <button mat-mini-fab color="primary" matTooltip="Adicionar" fxFlexOffset="40px">
-            <mat-icon>add</mat-icon>
-        </button>      
     </div>
     
-    <div fxLayoutAlign="space-between">
-        <button mat-raised-button color="warn" routerLink="/main/usuario/consulta">Cancelar</button>
+    <div fxFlex="100">
+       <mat-chip-list>
+           <mat-chip color="primary" selected="true" *ngFor="let professor of form.controls['professores'].value">
+               {{professor.nome}}
+               <mat-icon matChipRemove (click)="removeProfessor(professor.id)">cancel</mat-icon>
+            </mat-chip>
+       </mat-chip-list>
+    </div>
+
+    <div fxLayoutAlign="space-between" class="buttons">
+        <button type="button" mat-raised-button color="warn" routerLink="/main/disciplina/consulta">Cancelar</button>
         <button mat-raised-button color="primary">Cadastrar</button>
     </div>
    

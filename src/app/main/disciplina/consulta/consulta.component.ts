@@ -10,7 +10,7 @@ import { Router } from '@angular/router'
   styleUrls: ['./consulta.component.scss']
 })
 export class ConsultaComponent {
-  displayedColumns = ['id','instrutores','descricao', 'segmento', 'dataInicio', 'dataTermino', 'actions'];
+  displayedColumns = ['id', 'logoUrl', 'professores','descricao', 'segmento', 'dataInicio', 'dataTermino', 'actions'];
   users:Array<Element>;
   dataSource = null;
 
@@ -26,24 +26,22 @@ export class ConsultaComponent {
     this.populateDataSource();
   }
 
-  deleteUser(id:number){
-    return this.service.delete(id).subscribe(suc=> {
+  deleteDisciplina(id:number){
+     return this.service.delete(id).subscribe(suc=> {
       this.populateDataSource();
 
-      this.snackBar.open('Usuário removido', 'Ok', {
+      this.snackBar.open('Disciplina removida', 'Ok', {
         duration: 3000,
       });
     });
   }
 
-  editUser(id){
+  editDisciplina(id){
     this._router.navigate(['/main/disciplina/editar', id]);
   }
 
   private populateDataSource(){
     let list = this.service.getAll().subscribe(suc=>{
-      console.log(suc);
-
       this.dataSource = new MatTableDataSource<any>(suc);
     });
   }

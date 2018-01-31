@@ -11,7 +11,8 @@ import { MatOptionModule, MatButtonModule, MatTooltipModule, MatFormFieldModule,
 import { DisciplinaService } from './disciplina.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { InstrutorService } from './instrutor.service';
+import { professorService } from './professor.service';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   imports: [
@@ -32,13 +33,14 @@ import { InstrutorService } from './instrutor.service';
     MatIconModule,
     MatSnackBarModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatChipsModule
   ],
   declarations: [ConsultaComponent, FormularioComponent],
   providers: [
     FormBuilder, 
     DisciplinaService,
-    InstrutorService,
+    professorService,
     HttpClient,
     {provide:MAT_DATE_LOCALE, useValue: 'pt-br'}
   ]

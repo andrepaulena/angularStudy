@@ -3,7 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable()
-export class InstrutorService {
+export class professorService {
   private url = environment.url+'/api/v1/usuarios';
 
   constructor(private http : HttpClient) {}

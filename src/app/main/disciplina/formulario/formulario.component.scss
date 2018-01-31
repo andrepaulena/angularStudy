@@ -1,0 +1,11 @@
+.logoImg{
+    max-height: 50px
+}
+
+.buttons{
+    margin-top: 25px
+}
+
+.mat-chip:not(.mat-basic-chip)+.mat-chip:not(.mat-basic-chip) {
+    margin: 8px 0px 8px 8px;
+}
