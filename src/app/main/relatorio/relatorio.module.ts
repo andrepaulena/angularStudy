@@ -7,6 +7,8 @@ import { MatExpansionModule, MatAccordion, MatIconModule, MatButtonModule, MatFo
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule, FormsModule, FormBuilder } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { DisciplinaService } from '../services/disciplina.service';
+import { RelatorioService } from './relatorio.service';
 
 @NgModule({
   imports: [
@@ -32,6 +34,8 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   declarations: [PresencaComponent],
   providers: [
+    RelatorioService,
+    DisciplinaService,
     FormBuilder,
     {provide:MAT_DATE_LOCALE, useValue: 'pt-br'}
   ]
