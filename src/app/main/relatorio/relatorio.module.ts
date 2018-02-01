@@ -6,9 +6,11 @@ import { RouterModule } from '@angular/router';
 import { MatExpansionModule, MatAccordion, MatIconModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatTooltipModule, MatSelectModule, MatOptionModule, MatDatepickerModule, MatNativeDateModule, MatListModule, MatDialogModule, MAT_DATE_LOCALE } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule, FormsModule, FormBuilder } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DisciplinaService } from '../services/disciplina.service';
 import { RelatorioService } from './relatorio.service';
+import { ItemPresencaComponent } from './item-presenca/item-presenca.component';
+import { AuthInterceptorService } from '../services/auth.interceptor.service';
 
 @NgModule({
   imports: [
@@ -32,12 +34,17 @@ import { RelatorioService } from './relatorio.service';
     MatExpansionModule,
     HttpClientModule
   ],
-  declarations: [PresencaComponent],
+  declarations: [PresencaComponent, ItemPresencaComponent],
   providers: [
     RelatorioService,
     DisciplinaService,
     FormBuilder,
-    {provide:MAT_DATE_LOCALE, useValue: 'pt-br'}
+    {provide:MAT_DATE_LOCALE, useValue: 'pt-br'},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
   ]
 })
 export class RelatorioModule { }

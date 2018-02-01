@@ -5,7 +5,7 @@ import { FormularioComponent } from './formulario/formulario.component';
 import { MatTableModule } from '@angular/material/table';
 import { DisciplinaRouting } from './disciplina.routing';
 import { ReactiveFormsModule, FormsModule, FormBuilder  } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http'
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { RouterModule } from "@angular/router";
 import { MatOptionModule, MatButtonModule, MatTooltipModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatIconModule, MatSnackBarModule, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -18,6 +18,7 @@ import { MatListModule } from '@angular/material/list';
 import { QrcodeComponent } from './qrcode/qrcode.component';
 import { QrCodeService } from './qrCode.service';
 import { DisciplinaService } from '../services/disciplina.service';
+import { AuthInterceptorService } from '../services/auth.interceptor.service';
 
 @NgModule({
   imports: [
@@ -51,7 +52,12 @@ import { DisciplinaService } from '../services/disciplina.service';
     professorService,
     QrCodeService,
     HttpClient,
-    {provide:MAT_DATE_LOCALE, useValue: 'pt-br'}
+    {provide:MAT_DATE_LOCALE, useValue: 'pt-br'},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
   ]
 })
 export class DisciplinaModule { }
