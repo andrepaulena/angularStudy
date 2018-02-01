@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { DisciplinaService } from '../disciplina.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { Router } from '@angular/router'
 import { ProfessorComponent } from '../professor/professor.component';
 import { professorService } from '../professor.service';
 import { QrcodeComponent } from '../qrcode/qrcode.component';
+import { DisciplinaService } from '../../services/disciplina.service';
 
 @Component({
   selector: 'app-consulta',

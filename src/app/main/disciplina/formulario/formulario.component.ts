@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EqualsFieldValidator } from '../../../validators/equals-field-validator.validator';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DisciplinaService } from '../disciplina.service';
 import { MatSnackBar } from '@angular/material';
 import { professorService } from '../professor.service';
 import * as moment from 'moment';
+import { DisciplinaService } from '../../services/disciplina.service';
 
 @Component({
   selector: 'app-formulario',

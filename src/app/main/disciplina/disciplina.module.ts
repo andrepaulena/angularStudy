@@ -8,7 +8,6 @@ import { ReactiveFormsModule, FormsModule, FormBuilder  } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http'
 import { RouterModule } from "@angular/router";
 import { MatOptionModule, MatButtonModule, MatTooltipModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatIconModule, MatSnackBarModule, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material';
-import { DisciplinaService } from './disciplina.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { professorService } from './professor.service';
@@ -18,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
 import { QrcodeComponent } from './qrcode/qrcode.component';
 import { QrCodeService } from './qrCode.service';
+import { DisciplinaService } from '../services/disciplina.service';
 
 @NgModule({
   imports: [

@@ -1,5 +1,5 @@
 import { TestBed, inject } from '@angular/core/testing';
-import { DisciplinaService } from './disciplina.service';
+import { DisciplinaService } from '../services/disciplina.service';
 
 describe('disciplinaService', () => {
   beforeEach(() => {
